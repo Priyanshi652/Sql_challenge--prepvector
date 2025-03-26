@@ -1,1 +1,5 @@
-https://challenges.prepvector.com/challenges/fe090a86-abf5-4e46-92b4-6fc5ce069bc3/questions/04e7018e-0724-4f82-b90f-000f286da314
+SELECT 
+   ROUND(100.0 * COUNT(*) / (SELECT COUNT(*) FROM users), 2) AS percentage
+FROM users
+WHERE user_id NOT IN (SELECT DISTINCT user_id FROM events WHERE action IN ('like', 'comment'));
+

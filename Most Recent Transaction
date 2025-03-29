@@ -1,0 +1,8 @@
+SELECT id, created_at,transaction_value
+FROM customer_sales cs_1
+WHERE created_at = (
+    SELECT MAX(created_at)
+    FROM customer_sales cs_2
+    WHERE DATE(cs_1.created_at) = DATE(cs_2.created_at)
+)
+ORDER BY created_at;

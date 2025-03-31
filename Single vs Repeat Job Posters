@@ -1,0 +1,13 @@
+SELECT 
+    SUM(CASE WHEN multiple_count = 0 THEN 1 ELSE 0 END) AS single_post_users,
+    SUM(CASE WHEN multiple_count > 0 THEN 1 ELSE 0 END) AS multiple_post_users
+FROM (
+    SELECT user_id, 
+           SUM(CASE WHEN job_count > 1 THEN 1 ELSE 0 END) AS multiple_count
+    FROM (
+        SELECT user_id, job_id, COUNT(*) AS job_count
+        FROM job_postings
+        GROUP BY user_id, job_id
+    ) AS job_counts
+    GROUP BY user_id
+) AS user_multiple_counts;

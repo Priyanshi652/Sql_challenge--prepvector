@@ -1,0 +1,10 @@
+WITH AvgTransactionPrice AS (
+    SELECT AVG(amount) AS avg_transaction_price
+    FROM transactions
+)
+SELECT p.product_id, 
+       p.price, 
+       a.avg_transaction_price
+FROM products p
+CROSS JOIN AvgTransactionPrice a
+WHERE p.price > a.avg_transaction_price;

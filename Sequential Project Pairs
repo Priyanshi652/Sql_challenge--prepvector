@@ -1,0 +1,6 @@
+SELECT proj_end.title AS project_title_end, 
+       proj_start.title AS project_title_start, 
+       proj_end.end_date AS date
+FROM projects AS proj_end
+JOIN projects AS proj_start 
+ON proj_end.end_date = proj_start.start_date;
